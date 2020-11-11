@@ -20,7 +20,7 @@ const Home = () => {
                     <h1>Projeto Marthe</h1>
                     <p>Uma rede de apoio entre ONGs, empresas, voluntários e prostitutas.</p>
 
-                    <Link to="/create-point">
+                    <Link to="/cadastro-mulher">
                         <span>
                             <FiLogIn />
                         </span>

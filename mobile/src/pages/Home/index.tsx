@@ -37,8 +37,8 @@ const Home = () => {
 
               {/* depois de colocarmos o KeyboardAvoidingView por volta os textos ficaram fixos entao colocamos View sem nada em volta */}
               <View>
-                <Text style={styles.title}>Seu marketplace de coleta de resíduos</Text>
-                <Text style ={styles.description}>Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.</Text>
+                <Text style={styles.title}>A plataforma que une as mulheres em prostituição e oportunidades</Text>
+                <Text style ={styles.description}>A conexão entre empresas, ONGs e mulheres em situação de prostituição. </Text>
               </View>
             </View>
             {/* <View style={styles.input}>

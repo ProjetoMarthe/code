@@ -6,7 +6,7 @@ import { IPAddress } from '../../../UserIPAddress';
 Parameter 'request' has any tipe: precisamos informar manualmente (importamos Request e Response e informamos que request: Request (request é do tipo request) */
 class PointsController {
 
-    /* ~ Listar Pontos de Coleta (Filtro por Cidade/Estado/items) ~ */ 
+    /* ~ Listar Mulheres Cadastradas ~ */ 
     async index (request: Request, response: Response) {
         const { city, uf, items } = request.query;
 
@@ -14,12 +14,6 @@ class PointsController {
         .split(',')
         .map(item => Number(item.trim())); // trim: remove espaçamento
         // Quando recebemos no query, fazemos um cast pra confirmar o formato que estamos recebendo String(a), Number(b)
-
-
-        // JOIN: Filtro pra retornar os pontos que coletam itens específicos (join na tabela point_itens que possui essa relação)
-        // WHEREIN: que tem pelo menos um item_id que esta dentro dos itens que estou recebendo no filtro (parsedItems)
-        // DISTINCT: se coletar todos os itens não vai aparecer duplicado
-        // SELECT('points.*'): quero buscar apenas todos os dados da tabela points, não da tabela que fiz join
 
         const points = await knex('points')
         .join('point_items', 'points.id', '=', 'point_items.point_id')
@@ -33,7 +27,7 @@ class PointsController {
         const serializedPoints = points.map(point => {
             // MAP: percorre os points e retorna da maneira que você quiser
             return {
-                ...point, // retornar todos os dados do ponto
+                ...point, // retornar todos os dados 
                 // image_url: `http://192.168.15.15:3333/uploads/${point.image}`, //adicionar o campo image_url com o endereço correto pro mobile que precisa disso já que nao consegue usar apenas o nome da imagem salva em uploads que é um nome com hash
                 image_url: `http://${IPAddress}:3333/uploads/${point.image}`, //adicionar o campo image_url com o endereço correto pro mobile que precisa disso já que nao consegue usar apenas o nome da imagem salva em uploads que é um nome com hash
             };
@@ -43,10 +37,10 @@ class PointsController {
     }
 
 
-    /* ~ Listar Ponto de Coleta específico ~*/
+    /* ~ Listar Mulher Cadastrada Especifico ~*/
     async show (request: Request, response: Response) {
         // const id = request.params.id desestruturado vira const { id } = request.params
-        const { id } = request.params; // id do ponto de coleta especifico que vai ser exibido
+        const { id } = request.params; // id da mulher cadastrada especifico que vai ser exibida
 
         // first: como sabemos que o id é unico, o first retornará o primeiro (único), ao inves de considerar point um array
         const point = await knex('points').where('id', id). first();
@@ -57,19 +51,11 @@ class PointsController {
 
         // SERIALIZAÇÃO para permitir que o mobile acesse a imagem com o caminho 
         const serializedPoint = {
-            ...point, // retornar todos os dados do ponto
+            ...point, // retornar todos os dados
             // image_url: `http://192.168.15.15:3333/uploads/${point.image}`, //adicionar o campo image_url com o endereço correto pro mobile (igual ao feito no método index)
             image_url: `http://${IPAddress}:3333/uploads/${point.image}`, //adicionar o campo image_url com o endereço correto pro mobile (igual ao feito no método index)
         };
 
-        // No mobile quando listarmos um ponto de coleta, precisamos dos itens que ele coleta
-        
-        /* ~ Listar todos os itens relacionados a esse ponto de coleta ~ 
-            
-            Join de items com point_items (tabela que relaciona item com ponto)
-            com o id do item  igual ao id do point items
-            aonde o point_id da tabela de relacao seja igual ao id recebido la em cima
-        */
         const items = await knex('items')
         .join('point_items', 'items.id', '=', 'point_items.item_id' )
         .where('point_items.point_id', id)
@@ -78,10 +64,9 @@ class PointsController {
         return response.json({ point: serializedPoint, items }); // por causa da serialização agora retornamos point como sendo serializedPoint
     }
 
-    /* ~ Criar Pontos de Coleta ~ */
+    /* ~ Cadastrar Mulheres ~ */
     async create (request: Request, response: Response) {
         // DESESTRUTURAÇÃO: Ao invés de fazer "const data = request.body", como sabemos o formato do body podemos colocar cada campo em uma variavel, quer dizer o mesmo que "const name = request.body.name" para cada campo 
-        // colocamos os items pois serão mostrados em "itens de coleta"
         const {
             name,
             email, 
@@ -99,7 +84,7 @@ class PointsController {
     
         // SHORT SYNTAX: ao inves de fazer email: email, como o nome da variavel é igual ao nome da propriedade do objeto, podemos omitir
         // retorna os ids dos dados inseridos
-        // (1.) INSERÇÃO DOS PONTOS
+        // (1.) INSERÇÃO 
         const point = {
             // image: request.file.filename, // pegamos o arquivo recebido no upload pelo multer
             image: request.file.filename, // pegamos o arquivo recebido no upload pelo multer
@@ -119,7 +104,7 @@ class PointsController {
             item_id virou (item_id: number) pq o typescript reclamou que o item_id nao tinha tipo pre definido 
             
             Ao invés de apenas "const pointItems = items.map((item_id: number )=> {"
-            agora que convertemos a criaçãod o ponto no insomnia de JSON para Multipart para aceitar arquivos,
+            agora que convertemos a criação no insomnia de JSON para Multipart para aceitar arquivos,
             fazemos um split e um map+trim para remover virgulas e espaços 
             ao inves de Number na hora de converter pra numero poderia ser parseInt ou apenas colocarmos
             (item: string )=> +item.trim()) tbm converteria pra numero*/
@@ -141,7 +126,6 @@ class PointsController {
         await trx.commit(); // faz de fato os inserts na base de dados
 
         // SPREAD: com os ... você pega o conteúdo de um objeto (point) e retorna dentro de outro (o do return)
-        // retorna dados do ponto de coleta criado e o id
         return response.json({
             id: point_id,
             ... point,

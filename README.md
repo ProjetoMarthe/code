@@ -1,13 +1,11 @@
 <div align="center">
 
-![Node_Badge](https://img.shields.io/badge/node-12.18.1-brightgreen)  ![React_Badge](https://img.shields.io/badge/web-react-ff69b4)  ![React_Native_Badge](https://img.shields.io/badge/mobile-react%20native-blueviolet)  ![Npm_Badge](https://img.shields.io/badge/npm-6.14.5-red)  ![TypeScript](https://img.shields.io/badge/%3C%2F%3E-typescript-blue)  ![languages](https://img.shields.io/badge/languages-4-9cf)  ![GitHub](https://img.shields.io/github/license/x0n4d0/ecoleta)  <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%237519C1">
-  </a>
+![Node_Badge](https://img.shields.io/badge/node-12.18.1-brightgreen)  ![React_Badge](https://img.shields.io/badge/web-react-ff69b4)  ![React_Native_Badge](https://img.shields.io/badge/mobile-react%20native-blueviolet)  ![Npm_Badge](https://img.shields.io/badge/npm-6.14.5-red)  ![TypeScript](https://img.shields.io/badge/%3C%2F%3E-typescript-blue)  ![languages](https://img.shields.io/badge/languages-4-9cf) 
 
 </div>
 
 <p align="center">
-<strong>Ecoleta</strong> - a conexão entre empresas e entidades de coleta de resíduos (orgânicos e inorgânicos), providenciando um descarte ecológico e facilitando processos de reutilização e reciclagem. 
+<strong>Marthe</strong> - a conexão entre empresas, ONGs e mulheres em situação de prostituição. 
 </p>
 
 <p align="center">
@@ -18,11 +16,6 @@
   <a href="#page_facing_up-licença">Licença</a>
 </p>
 
-<div align="center">
-  <img alt="Aplicação Web" src="./ecoleta-web.gif">
-  </br></br>
-  <img alt="Aplicação Mobile" src="./ecoleta-mobile.gif" width="300">
-</div>
 
 ## **:computer: TECNOLOGIAS**
 
@@ -82,10 +75,10 @@ Requisitos: [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), Edito
 $ ipconfig
 
 # Clone este repositório
-$ git clone https://github.com/jubrito/ecoleta
+$ git clone https://github.com/ProjetoMarthe/code.git
 
 # Acesse a pasta do projeto no cmd/terminal
-$ cd ecoleta
+$ cd code
 
 ```
 
@@ -171,6 +164,5 @@ Abra o aplicativo do Expo no modo **LAN**, faça o scan do QRCode e abra o proje
 
 
 ## **:page_facing_up: LICENÇA**
-Licença MIT &rarr; **<kbd>[LICENSE](https://github.com/Rocketseat/nlw-01-booster/blob/master/LICENSE.md)</kbd>**
 
-Projeto Open Source desenvolvido Desenvolvido durante a NLW - Next Level Week, [RocketSeat](https://rocketseat.com.br/)
+Projeto Open Source desenvolvido Desenvolvido durante a aula de empreendedorismo, EACH-USP.

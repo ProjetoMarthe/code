@@ -32,7 +32,7 @@ interface Params {
 
 const Points = () => {
 
-  // ESTADO dos pontos de coletas buscados na API
+  // ESTADO  buscados na API
   const [ points, setPoints ] = useState<Point[]>([]);
 
   // ESTADO de itens da PI
@@ -82,7 +82,7 @@ const Points = () => {
     })
   }, []);
 
-  /* CARREGAR OS PONTOS DE COLETA */
+  /* CARREGAR   */
   useEffect(()=> {
     api.get('points', {
       // enviando os query parms
@@ -112,7 +112,7 @@ const Points = () => {
   }
 
   function handleNavigateToDetail(id: number) {
-    navigation.navigate('Detail', { point_id: id }); // tudo entre { } é passado como parâmetro para a rota (nesse caso estamos passando o id do ponto)
+    navigation.navigate('Detail', { point_id: id }); // tudo entre { } é passado como parâmetro para a rota (nesse caso estamos passando o id)
   }
   function handleNavigateBack() {
       navigation.goBack(); // voltar pra página anterior
@@ -126,7 +126,7 @@ const Points = () => {
               </TouchableOpacity>
 
               <Text style={styles.title}>Bem vindo.</Text>
-              <Text style={styles.description}>Encontre no mapa um ponto de coleta.</Text>
+              <Text style={styles.description}>Encontre no mapa .</Text>
 
               {/* BORDER-RADIUS SÓ FUNCIONA NAS VIEWS */}
               <View style={styles.mapContainer}>

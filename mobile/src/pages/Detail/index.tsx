@@ -28,7 +28,7 @@ interface Data {
 }
 
 const Detail = () => {
-  // Estado para armazenar as informações de um ponto de coleta (dados do ponto e os itens por ele coletados)
+  // Estado para armazenar as informações
   const [ data, setData ] = useState<Data>({} as Data);
 
   const navigation = useNavigation();
@@ -40,7 +40,7 @@ const Detail = () => {
       > falamos pro Typescript que a variável routeParams tem o formado da interface Params */
   const routeParams = route.params as Params;
 
-  useEffect(() => { // acessa a rota de busca por um ponto específico de acordo com o seu id
+  useEffect(() => { // acessa a rota de busca por um específico de acordo com o seu id
     api.get(`points/${routeParams.point_id}`).then(response => {
       setData(response.data);
     });
@@ -58,12 +58,12 @@ const Detail = () => {
   // Mandar e-mail https://docs.expo.io/versions/latest/sdk/mail-composer/
   function handleComposeMail() {
     MailComposer.composeAsync({
-      subject: 'Interesse na coleta de resíduos',
-      recipients: [data.point.email], // email do ponto
+      subject: 'Interesse',
+      recipients: [data.point.email], // email
     })
   }
 
-  // "LOADING" DOS PONTOS (na vdd agr só fica branco)
+  // "LOADING" (na vdd agr só fica branco)
   if (!data.point) {
     return null; 
   }

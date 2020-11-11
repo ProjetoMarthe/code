@@ -19,20 +19,20 @@ const itemsController = new ItemsController();
 routes.get('/items', itemsController.index);
 
 
-/* Listar Pontos de Coleta (Filtro por Estado/Cidade/items) */
+/* Listar (Filtro por Estado/Cidade/items) */
 routes.get('/points', pointsController.index);      // query param
 
-/* Listar Ponto de Coleta específico */
+/* Listar específico */
 routes.get('/points/:id', pointsController.show);   // request param
 
-/* Criar Pontos de Coleta */
+/* Criar  */
 routes.post(
     '/points', 
     upload.single('image'), // UPLOAD DE IMAGENS: Antes de chamar o método create do controller, passamos o upload.single() ou seja recebemos um único arquivo
     /* MELHORIA: repassar essa parte pra um outro arquivo */
     celebrate({
-        // validar tanto o REQUEST BODY: corpo da requisição (o que enviamos no POST de criação do ponto), os QUERY PARAMS da rota de Listagem de Pontos e os PARAMS que são os da rota (por exemplo na rota de Listar Ponto Específico o id em localhost.../points/9)
-        /* Criação de pontos de coleta que agora enviamos através de Multipart (antes era JSON) */
+        // validar tanto o REQUEST BODY: corpo da requisição (o que enviamos no POST de criação), os QUERY PARAMS da rota de Listagem e os PARAMS que são os da rota (por exemplo na rota de Listar Específico o id em localhost.../points/9)
+        /* Criação que agora enviamos através de Multipart (antes era JSON) */
         body: Joi.object().keys({
             name: Joi.string().required(), // string obrigatório
             email: Joi.string().required().email(), // string obrigatória em formato de email
